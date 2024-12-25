@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ececec; /* আধুনিক হালকা ধূসর */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* প্রিমিয়াম শ্যাডো */
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50; /* গাঢ় নেভি ব্লু */
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 12px 15px; /* সাধারণ প্যাডিং */
+            padding-left: 40px; /* আইকনের জন্য স্থান */
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .input-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 16px; /* আইকন আকার */
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(45deg, #3498db, #2980b9); /* গ্রেডিয়েন্ট বাটন */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(45deg, #2980b9, #21618c);
+        }
+
+        .error-message {
+            color: #e74c3c; /* লাল বার্তা */
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .login-container .icon-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container .icon-container i {
+            font-size: 50px;
+            color: #3498db; /* নীল অ্যাডমিন আইকন */
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="icon-container">
+        <i class="fas fa-user-shield"></i>
+    </div>
+    <h2>Admin Login</h2>
+    <form method="post">
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+        <label for="password">Password:</label>
+        <div class="input-group">
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+</div>
+</body>
+</html>
