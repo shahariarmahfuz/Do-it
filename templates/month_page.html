@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ year }} - {{ month }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            table th, table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>{{ year }} - {{ month }}</h2>
+    <table class="data-table">
+    <tr>
+        <th>Date</th>
+        <th>হস্তমৈথুন</th>
+        <th>নামাজ (ওয়াক্ত)</th>
+        <th>গেম (ঘণ্টা)</th>
+        <th>ঘুম থেকে উঠা</th>
+        <th>ঘুমানো</th>
+    </tr>
+    {% for day in days %}
+    <tr>
+        <td>{{ day.date }}</td>
+        <td>{{ day["হস্তমৈথুন"] }}</td>
+        <td>{{ day["নামাজ (ওয়াক্ত)"] }}</td>
+        <td>{{ day["গেম (ঘণ্টা)"] }}</td>
+        <td>{{ day["ঘুম থেকে উঠা"] }}</td>
+        <td>{{ day["ঘুমানো"] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
