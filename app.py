@@ -89,6 +89,23 @@ def is_session_expired():
             return datetime.now(timezone.utc) > expiration_time
     return True
 
+@app.route('/keep_alive')
+def keep_alive():
+    return "I'm alive!", 200
+
+# Function to periodically ping the Keep-Alive route
+def keep_alive_task():
+    while True:
+        try:
+            response = requests.get('https://nekotools.onrender.com/keep_alive')
+            if response.status_code == 200:
+                print("Keep-alive ping sent successfully.")
+            else:
+                print(f"Keep-alive ping failed with status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Failed to send keep-alive ping: {e}")
+        time.sleep(300)
+        
 # Public home page
 @app.route('/')
 def public_home():
