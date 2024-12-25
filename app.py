@@ -97,7 +97,7 @@ def keep_alive():
 def keep_alive_task():
     while True:
         try:
-            response = requests.get('https://nekotools.onrender.com/keep_alive')
+            response = requests.get('https://icando.onrender.com/keep_alive')
             if response.status_code == 200:
                 print("Keep-alive ping sent successfully.")
             else:
