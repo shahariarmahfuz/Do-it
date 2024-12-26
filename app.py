@@ -8,6 +8,9 @@ from email.mime.multipart import MIMEMultipart
 import secrets
 import string
 from datetime import datetime, timedelta, timezone
+import threading
+import time
+import requests
 
 app = Flask(__name__)
 app.secret_key = "secretkey0987"
@@ -105,7 +108,7 @@ def keep_alive_task():
         except requests.exceptions.RequestException as e:
             print(f"Failed to send keep-alive ping: {e}")
         time.sleep(300)
-        
+
 # Public home page
 @app.route('/')
 def public_home():
@@ -119,21 +122,19 @@ def admin_login():
         if 'generated_password' in session and password == session['generated_password']:
             session['admin'] = True
             session['last_login_time'] = datetime.now(timezone.utc)
-            del session['generated_password']  # Remove the password after successful login
+            del session['generated_password']
             return redirect(url_for('admin_dashboard'))
         else:
             return render_template('admin_login.html', error="Incorrect password")
     else:
-        # Check if session is expired or not even logged in.
         if not is_session_expired():
-           return redirect(url_for("admin_dashboard"))
+            return redirect(url_for("admin_dashboard"))
 
-        # Generate and send a new password only if there isn't one already
         if 'generated_password' not in session:
             new_password = generate_password()
             send_email("Your Admin Panel Password", f"Your new password is: {new_password}")
             session['generated_password'] = new_password
-            print(f"Generated Password: {new_password}") # For debugging
+            print(f"Generated Password: {new_password}")
     return render_template('admin_login.html')
 
 # Admin Dashboard
@@ -181,7 +182,6 @@ def edit_month(year, month):
             if "ঘুমানো" in updated_data:
                 day["ঘুমানো"] = updated_data["ঘুমানো"][i]
 
-            # Compare original and updated data to build the changes string
             for key in day:
                 if original_day[key] != day[key]:
                     changes += f"\n{day['date']}: {key} changed from '{original_day[key]}' to '{day[key]}'"
@@ -221,4 +221,9 @@ def admin_logout():
     return redirect(url_for('admin_login'))
 
 if __name__ == "__main__":
+    # Start the keep-alive thread
+    keep_alive_thread = threading.Thread(target=keep_alive_task, daemon=True)
+    keep_alive_thread.start()
+
+    # Run Flask app
     app.run(host="0.0.0.0", port=5000, debug=True)
