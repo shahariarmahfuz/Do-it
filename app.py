@@ -158,6 +158,14 @@ def create_month():
         return redirect(url_for('admin_dashboard'))
     return render_template('create_month.html')
 
+@app.route('/data.json')
+def view_data_json():
+    if os.path.exists("data.json"):
+        with open("data.json", "r") as file:
+            data = json.load(file)
+        return jsonify(data)  # JSON আকারে তথ্য রিটার্ন করুন
+    return jsonify({"error": "Data file not found"}), 404
+
 # Edit data for a specific month (Admin Only)
 @app.route('/admin/<year>/<month>/edit', methods=['GET', 'POST'])
 def edit_month(year, month):
