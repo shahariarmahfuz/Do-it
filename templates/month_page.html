@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ year }} - {{ month }}</title>
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        /* Kohinoor Bangla Font Integration */
+        @font-face {
+            font-family: 'Kohinoor Bangla';
+            src: url('/static/KohinoorBangla-Regular.otf') format('opentype');
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Kohinoor Bangla', Arial, sans-serif;
             background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         h2 {
             text-align: center;
-            margin-top: 20px;
+            margin: 20px 0;
             color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 0 auto;
         }
 
         table {
-            width: 90%;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 1200px;
+            margin: 10px auto;
             border-collapse: collapse;
             background: white;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        table th, table td {
-            padding: 10px;
+        table th,
+        table td {
+            padding: 12px 8px;
             border: 1px solid #ddd;
             text-align: center;
+            font-size: 14px;
         }
 
         table th {
             background-color: #007BFF;
             color: white;
+            font-weight: bold;
         }
 
         table tr:nth-child(even) {
@@ -43,33 +67,106 @@
         table tr:nth-child(odd) {
             background-color: #ffffff;
         }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        @media screen and (max-width: 768px) {
+            table th,
+            table td {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            table th,
+            table td {
+                font-size: 10px;
+                padding: 8px 5px;
+            }
+
+            h2 {
+                font-size: 18px;
+                margin: 15px 0;
+            }
+        }
+
+        /* Button Styles */
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .go-to-dashboard {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.3);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .go-to-dashboard:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 8px rgba(0, 86, 179, 0.4);
+        }
+
+        .go-to-dashboard i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
     </style>
 </head>
+
 <body>
     <h2>{{ year }} - {{ month }}</h2>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>হস্তমৈথুন</th>
-            <th>নামাজ</th>
-            <th>গেমিং</th>
-            <th>জাগ্রত হওয়া</th>
-            <th>নিদ্রা যাওয়া</th>
-            <th>মোবাইল ব্যবহার</th>
-            <th>বাহিরে সময়</th>
-        </tr>
-        {% for day in days %}
-        <tr>
-            <td>{{ day.date }}</td>
-            <td>{{ day["হস্তমৈথুন"] }}</td>
-            <td>{{ day["নামাজ"] }}</td>
-            <td>{{ day["গেমিং"] }}</td>
-            <td>{{ day["জাগ্রত হওয়া"] }}</td>
-            <td>{{ day["নিদ্রা যাওয়া"] }}</td>
-            <td>{{ day["মোবাইল ব্যবহার"] }}</td>
-            <td>{{ day["বাহিরে সময়"] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>হস্তমৈথুন</th>
+                <th>নামাজ</th>
+                <th>গেমিং</th>
+                <th>জাগ্রত হওয়া</th>
+                <th>নিদ্রা যাওয়া</th>
+                <th>মোবাইল ব্যবহার</th>
+                <th>বাহিরে সময়</th>
+            </tr>
+            {% for day in days %}
+            <tr>
+                <td>{{ day.date }}</td>
+                <td>{{ day["হস্তমৈথুন"] }}</td>
+                <td>{{ day["নামাজ"] }}</td>
+                <td>{{ day["গেমিং"] }}</td>
+                <td>{{ day["জাগ্রত হওয়া"] }}</td>
+                <td>{{ day["নিদ্রা যাওয়া"] }}</td>
+                <td>{{ day["মোবাইল ব্যবহার"] }}</td>
+                <td>{{ day["বাহিরে সময়"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Button Section -->
+    <div class="button-container">
+        <a href="/" class="go-to-dashboard">
+            <i class="fas fa-arrow-circle-right"></i>
+            Go to Dashboard
+        </a>
+    </div>
 </body>
+
 </html>
