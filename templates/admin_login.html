@@ -1,120 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #ececec; /* আধুনিক হালকা ধূসর */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* প্রিমিয়াম শ্যাডো */
-            width: 350px;
-        }
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background-color: #0d1117;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #c9d1d9;
+      overflow: hidden;
+    }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #2c3e50; /* গাঢ় নেভি ব্লু */
-            font-weight: bold;
-        }
+    .login-container {
+      background-color: rgba(18, 23, 28, 0.95);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+      width: 400px;
+      border: 3px solid #30363d;
+      position: relative;
+      z-index: 10;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #34495e;
-            font-weight: 600;
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #218838;
+      font-weight: bold;
+      font-size: 24px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px #218838;
+    }
 
-        .input-group {
-            position: relative;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #c9d1d9;
+      font-weight: 600;
+      font-size: 16px;
+    }
 
-        .input-group input[type="password"] {
-            width: 100%;
-            padding: 12px 15px; /* সাধারণ প্যাডিং */
-            padding-left: 40px; /* আইকনের জন্য স্থান */
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
 
-        .input-group .icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #aaa;
-            font-size: 16px; /* আইকন আকার */
-        }
+    .input-group input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      padding-left: 45px;
+      border: 2px solid #47476b;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+      background-color: #161b22;
+      color: #c9d1d9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        button[type="submit"] {
-            background: linear-gradient(45deg, #3498db, #2980b9); /* গ্রেডিয়েন্ট বাটন */
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
+    .input-group input[type="password"]:focus {
+      border-color: #218838;
+      box-shadow: 0 0 10px #218838;
+    }
 
-        button[type="submit"]:hover {
-            background: linear-gradient(45deg, #2980b9, #21618c);
-        }
+    .input-group .icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #47476b;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
 
-        .error-message {
-            color: #e74c3c; /* লাল বার্তা */
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
+    .input-group input[type="password"]:focus + .icon {
+      color: #218838;
+    }
 
-        .login-container .icon-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    button[type="submit"] {
+      background: linear-gradient(45deg, #218838, #0f601c);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px #218838;
+    }
 
-        .login-container .icon-container i {
-            font-size: 50px;
-            color: #3498db; /* নীল অ্যাডমিন আইকন */
-        }
-    </style>
+    button[type="submit"]:hover {
+      background: linear-gradient(45deg, #0f601c, #083810);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px #0f601c;
+    }
+
+    .error-message {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .login-container .icon-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-container .icon-container i {
+      font-size: 60px;
+      color: #218838;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      text-shadow: 0 0 5px #218838;
+    }
+
+    .login-container:hover .icon-container i {
+      transform: rotate(360deg);
+    }
+
+    .challenge-message {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffcc00;
+      font-weight: bold;
+      font-size: 16px;
+      animation: flicker 3s linear infinite alternate;
+    }
+
+    /* হ্যাকিং ইফেক্ট */
+    .hacking-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hacking-line {
+      position: absolute;
+      background-color: #218838;
+      opacity: 0.3;
+      animation: flicker 2s linear infinite alternate;
+    }
+
+    .hacking-line:nth-child(1) {
+      height: 2px;
+      width: 100%;
+      top: 20%;
+      animation-duration: 3s;
+    }
+
+    .hacking-line:nth-child(2) {
+      height: 2px;
+      width: 100%;
+      top: 80%;
+      animation-duration: 5s;
+    }
+
+    .hacking-line:nth-child(3) {
+      height: 100%;
+      width: 2px;
+      left: 10%;
+      animation-duration: 2s;
+    }
+
+    .hacking-line:nth-child(4) {
+      height: 100%;
+      width: 2px;
+      left: 90%;
+      animation-duration: 4s;
+    }
+
+    .glitch-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glitch-line {
+      position: absolute;
+      background-color: #218838;
+      opacity: 0.5;
+      animation: glitch 1s infinite alternate;
+    }
+
+    .glitch-line:nth-child(1) {
+      height: 100%;
+      width: 3px;
+      left: 5%;
+      animation-duration: 0.5s;
+    }
+
+    .glitch-line:nth-child(2) {
+      height: 100%;
+      width: 3px;
+      left: 95%;
+      animation-duration: 0.7s;
+    }
+
+    .terminal-text {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #218838;
+      font-size: 14px;
+      z-index: 3;
+      animation: typing 5s steps(40, end) infinite, blink-caret .75s step-end infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #218838;
+      padding-right: 5px;
+    }
+
+    /* Matrix Rain অ্যানিমেশন */
+    .matrix-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .matrix-rain span {
+      position: absolute;
+      color: #218838;
+      font-size: 18px;
+      opacity: 0;
+      animation: matrix-fall linear infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(5px);
+      }
+
+      50% {
+        transform: translateX(-5px);
+      }
+
+      75% {
+        transform: translateX(2px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #218838; }
+    }
+
+    @keyframes matrix-fall {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      95% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(100vh);
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="login-container">
+
+  <div class="hacking-effect">
+    <div class="hacking-line"></div>
+    <div class="hacking-line"></div>
+    <div class="hacking-line"></div>
+    <div class="hacking-line"></div>
+  </div>
+
+  <div class="glitch-effect">
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+  </div>
+
+  <div class="terminal-text">System intrusion detected...</div>
+
+  <div class="matrix-rain"></div>
+
+  <div class="login-container">
     <div class="icon-container">
-        <i class="fas fa-user-shield"></i>
+      <i class="fas fa-user-secret"></i>
     </div>
+
     <h2>Admin Login</h2>
+
     <form method="post">
-        {% if error %}
-            <p class="error-message">{{ error }}</p>
-        {% endif %}
-        <label for="password">Password:</label>
-        <div class="input-group">
-            <span class="icon"><i class="fas fa-lock"></i></span>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+      {% if error %}
+      <p class="error-message">"I got you, you're that spammer!"</p>
+      {% else %}
+      <p class="challenge-message">Do you think you can beat me? If so, give me the correct password hahaha</p>
+      {% endif %}
+
+      <label for="password">Password:</label>
+
+      <div class="input-group">
+        <span class="icon"><i class="fas fa-key"></i></span>
+        <input type="password" id="password" name="password" required>
+      </div>
+
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+
     </form>
-</div>
+  </div>
+
+  <script>
+    // Matrix Rain Effect
+    const matrixRain = document.querySelector('.matrix-rain');
+    const characters = '01';
+
+    for (let i = 0; i < 200; i++) {
+      const span = document.createElement('span');
+      span.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.animationDuration = `${Math.random() * 5 + 2}s`;
+      span.style.animationDelay = `${Math.random() * 5}s`;
+      matrixRain.appendChild(span);
+    }
+  </script>
 </body>
+
 </html>
