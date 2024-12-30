@@ -9,114 +9,319 @@
     <title>Edit {{ year }} - {{ month }} | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @font-face {
+            font-family: 'Kohinoor Bangla';
+            src: url('/static/KohinoorBangla-Regular.otf') format('opentype');
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa;
-            color: #495057;
+            font-family: 'Kohinoor Bangla', monospace;
+            background-color: #000;
+            color: #0f0;
         }
 
         h2 {
             text-align: center;
-            color: #007bff;
+            color: #0f0;
             margin-bottom: 30px;
-            font-weight: 600;
+            font-weight: 700;
+            text-shadow: 0 0 5px #0f0;
         }
 
-        table {
-            width: 90%;
-            margin: 30px auto;
-            border-collapse: collapse;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 95%;
+            margin: auto;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4);
+            border-radius: 15px;
+            background-color: #111;
+            border: 1px solid #0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        table th, table td {
-            padding: 12px 15px;
-            text-align: center;
-            border: 1px solid #dee2e6;
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 255, 0, 0.6);
         }
 
-        table th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        input[type="text"] {
-            width: 90%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        input[type="text"]:focus {
+        .accordion {
+            background-color: #003300;
+            color: #0f0;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
             outline: none;
-            border-color: #80bdff;
+            font-size: 16px;
+            transition: 0.4s;
+            border-bottom: 1px solid #0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .active, .accordion:hover {
+            background-color: #006600;
+        }
+
+        .accordion:after {
+            content: '\002B'; /* Unicode character for "plus" sign (+) */
+            font-size: 15px;
+            color: #0f0;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active:after {
+            transform: rotate(45deg);
+        }
+
+        .active:after {
+            content: "\2212"; /* Unicode character for "minus" sign (-) */
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: #222;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #0f0;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #0f0;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            font-family: 'Kohinoor Bangla', monospace;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: #000;
+            color: #0f0;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #0f0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+        }
+
+        .input-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            padding: 10px;
+            background-color: #003300;
+            color: #0f0;
+            border-radius: 8px 0 0 8px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .input-icon:hover .icon {
+            background-color: #006600;
+            transform: translateX(-2px);
+        }
+
+        .icon i {
+            font-size: 22px;
+        }
+
+        .input-field {
+            flex-grow: 1;
+        }
+
+        .input-field input {
+            border-radius: 0 8px 8px 0 !important;
+            width: calc(100% - 22px) !important;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
         }
 
         button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 18px;
-            border-radius: 5px;
+            background-color: #003300;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 20px auto;
-            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #0069d9;
+            background-color: #006600;
+            transform: scale(1.05);
         }
 
         a {
             text-align: center;
             display: block;
             margin-top: 20px;
-            font-size: 16px;
-            color: #007bff;
+            font-size: 18px;
+            color: #0f0;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         a:hover {
+            color: #fff;
             text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        /* Date Color */
+        .date {
+            color: #ff0;
+            font-weight: bold;
+            margin-left: 10px;
+            text-shadow: 0 0 5px #ff0;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0, 255, 0, 0.4);
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .form-group input[type="text"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .icon i {
+                font-size: 18px;
+            }
+
+            .btn-container {
+                margin-top: 20px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .accordion {
+                font-size: 14px;
+                padding: 15px;
+                margin-bottom: 5px;
+            }
+
+            .accordion:after {
+                font-size: 12px;
+            }
+
+            .panel {
+                padding: 0 15px;
+            }
         }
     </style>
 </head>
 <body>
+
+<div class="container">
     <h2>Edit {{ year }} - {{ month }}</h2>
     <form method="post">
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>হস্তমৈথুন</th>
-                <th>নামাজ</th>
-                <th>গেমিং</th>
-                <th>জাগ্রত হওয়া</th>
-                <th>নিদ্রা যাওয়া</th>
-                <th>মোবাইল ব্যবহার</th>
-                <th>বাহিরে সময়</th>
-            </tr>
-            {% for day in days %}
-            <tr>
-                <td>{{ day.date }}</td>
-                <td><input type="text" name="হস্তমৈথুন" value="{{ day["হস্তমৈথুন"] }}"></td>
-                <td><input type="text" name="নামাজ" value="{{ day["নামাজ"] }}"></td>
-                <td><input type="text" name="গেমিং" value="{{ day["গেমিং"] }}"></td>
-                <td><input type="text" name="জাগ্রত হওয়া" value="{{ day["জাগ্রত হওয়া"] }}"></td>
-                <td><input type="text" name="নিদ্রা যাওয়া" value="{{ day["নিদ্রা যাওয়া"] }}"></td>
-                <td><input type="text" name="মোবাইল ব্যবহার" value="{{ day["মোবাইল ব্যবহার"] }}"></td>
-                <td><input type="text" name="বাহিরে সময়" value="{{ day["বাহিরে সময়"] }}"></td>
-            </tr>
-            {% endfor %}
-        </table>
-        <button type="submit">Save Changes</button>
+        {% for day in days %}
+        <button type="button" class="accordion">{{ day.date }} <span class="date"></span></button>
+        <div class="panel">
+            <div class="form-group">
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-hand-paper"></i></span>
+                    <div class="input-field"><input type="text" name="হস্তমৈথুন" placeholder="হস্তমৈথুন" value="{{ day["হস্তমৈথুন"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-pray"></i></span>
+                    <div class="input-field"><input type="text" name="নামাজ" placeholder="নামাজ" value="{{ day["নামাজ"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-gamepad"></i></span>
+                    <div class="input-field"><input type="text" name="গেমিং" placeholder="গেমিং" value="{{ day["গেমিং"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-sun"></i></span>
+                    <div class="input-field"><input type="text" name="জাগ্রত হওয়া" placeholder="জাগ্রত হওয়া" value="{{ day["জাগ্রত হওয়া"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-moon"></i></span>
+                    <div class="input-field"><input type="text" name="নিদ্রা যাওয়া" placeholder="নিদ্রা যাওয়া" value="{{ day["নিদ্রা যাওয়া"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+                    <div class="input-field"><input type="text" name="মোবাইল ব্যবহার" placeholder="মোবাইল ব্যবহার" value="{{ day["মোবাইল ব্যবহার"] }}"></div>
+                </div>
+                <div class="input-icon">
+                    <span class="icon"><i class="fas fa-walking"></i></span>
+                    <div class="input-field"><input type="text" name="বাহিরে সময়" placeholder="বাহিরে সময়" value="{{ day["বাহিরে সময়"] }}"></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="btn-container">
+            <button type="submit">Save Changes</button>
+        </div>
     </form>
     <a href="/admin">Back to Dashboard</a>
+</div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+    // Close all other panels when one is opened
+    for (var j = 0; j < acc.length; j++) {
+        if (acc[j] !== this && acc[j].classList.contains("active")) {
+            acc[j].classList.remove("active");
+            acc[j].nextElementSibling.style.maxHeight = null;
+        }
+    }
+  });
+}
+</script>
+
 </body>
 </html>
