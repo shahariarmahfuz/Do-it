@@ -5,81 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Month</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier Prime', monospace;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #000;
+            color: #0f0;
         }
 
         h2 {
             text-align: center;
-            color: #2c3e50;
+            color: #0f0;
             margin: 20px 0;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 0 5px #0f0;
         }
 
         form {
             width: 90%;
+            max-width: 400px;
             margin: 20px auto;
-            background-color: white;
+            background-color: #111;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 255, 0, 0.4);
+            border: 1px solid #0f0;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0f0;
         }
 
-        input, select {
-            width: 100%;
+        input[type="number"] {
+            width: 95%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-radius: 5px;
-            border: 1px solid #ddd;
+            border: 1px solid #0f0;
+            font-size: 0.9rem;
+            background-color: #000;
+            color: #0f0;
+            box-shadow: inset 0 1px 3px rgba(0, 255, 0, 0.4);
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #0f0;
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+        }
+
+        .month-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .month-option {
+            flex: 1 1 calc(33.333% - 5px);
+            background-color: #003300;
+            color: #0f0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #0f0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .month-option:hover {
+            background-color: #006600;
+            box-shadow: 0px 4px 8px rgba(0, 255, 0, 0.6);
+        }
+
+        .month-option.selected {
+            background-color: #006600;
+            box-shadow: 0px 4px 8px rgba(0, 255, 0, 0.6);
         }
 
         button {
             display: block;
             width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
+            padding: 10px 15px;
+            background-color: #003300;
+            color: #0f0;
+            border: 1px solid #0f0;
             border-radius: 5px;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #006600;
+            box-shadow: 0px 4px 8px rgba(0, 255, 0, 0.6);
         }
     </style>
+    <script>
+        // JavaScript to handle month selection
+        document.addEventListener("DOMContentLoaded", () => {
+            const monthOptions = document.querySelectorAll('.month-option');
+            let selectedMonth = null;
+
+            monthOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove 'selected' class from all options
+                    monthOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add 'selected' class to the clicked option
+                    option.classList.add('selected');
+                    // Store the selected month in a hidden input field
+                    document.getElementById('selected-month').value = option.dataset.value;
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <h2>Create a New Month</h2>
     <form method="post">
         <label for="year">Year:</label>
-        <input type="number" id="year" name="year" required>
+        <input type="number" id="year" name="year" placeholder="Enter year" required>
 
         <label for="month">Month:</label>
-        <select id="month" name="month">
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
+        <div class="month-container">
+            <div class="month-option" data-value="January">January</div>
+            <div class="month-option" data-value="February">February</div>
+            <div class="month-option" data-value="March">March</div>
+            <div class="month-option" data-value="April">April</div>
+            <div class="month-option" data-value="May">May</div>
+            <div class="month-option" data-value="June">June</div>
+            <div class="month-option" data-value="July">July</div>
+            <div class="month-option" data-value="August">August</div>
+            <div class="month-option" data-value="September">September</div>
+            <div class="month-option" data-value="October">October</div>
+            <div class="month-option" data-value="November">November</div>
+            <div class="month-option" data-value="December">December</div>
+        </div>
+
+        <input type="hidden" id="selected-month" name="month" required>
 
         <button type="submit">Create Month</button>
     </form>
