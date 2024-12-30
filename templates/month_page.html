@@ -7,25 +7,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f9;
             color: #333;
         }
 
         h2 {
             text-align: center;
+            margin-top: 20px;
             color: #2c3e50;
-            margin: 20px 0;
         }
 
         table {
             width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: white;
+            background: white;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -38,7 +34,6 @@
         table th {
             background-color: #007BFF;
             color: white;
-            font-weight: bold;
         }
 
         table tr:nth-child(even) {
@@ -48,40 +43,33 @@
         table tr:nth-child(odd) {
             background-color: #ffffff;
         }
-
-        @media (max-width: 768px) {
-            table {
-                width: 100%;
-            }
-
-            table th, table td {
-                font-size: 14px;
-                padding: 8px;
-            }
-        }
     </style>
 </head>
 <body>
     <h2>{{ year }} - {{ month }}</h2>
-    <table class="data-table">
-    <tr>
-        <th>Date</th>
-        <th>হস্তমৈথুন</th>
-        <th>নামাজ (ওয়াক্ত)</th>
-        <th>গেম (ঘণ্টা)</th>
-        <th>ঘুম থেকে উঠা</th>
-        <th>ঘুমানো</th>
-    </tr>
-    {% for day in days %}
-    <tr>
-        <td>{{ day.date }}</td>
-        <td>{{ day["হস্তমৈথুন"] }}</td>
-        <td>{{ day["নামাজ (ওয়াক্ত)"] }}</td>
-        <td>{{ day["গেম (ঘণ্টা)"] }}</td>
-        <td>{{ day["ঘুম থেকে উঠা"] }}</td>
-        <td>{{ day["ঘুমানো"] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>হস্তমৈথুন</th>
+            <th>নামাজ</th>
+            <th>গেমিং</th>
+            <th>জাগ্রত হওয়া</th>
+            <th>নিদ্রা যাওয়া</th>
+            <th>মোবাইল ব্যবহার</th>
+            <th>বাহিরে সময়</th>
+        </tr>
+        {% for day in days %}
+        <tr>
+            <td>{{ day.date }}</td>
+            <td>{{ day["হস্তমৈথুন"] }}</td>
+            <td>{{ day["নামাজ"] }}</td>
+            <td>{{ day["গেমিং"] }}</td>
+            <td>{{ day["জাগ্রত হওয়া"] }}</td>
+            <td>{{ day["নিদ্রা যাওয়া"] }}</td>
+            <td>{{ day["মোবাইল ব্যবহার"] }}</td>
+            <td>{{ day["বাহিরে সময়"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
