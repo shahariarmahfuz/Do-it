@@ -6,138 +6,117 @@
     <meta name="description" content="Admin panel for editing monthly data">
     <meta name="keywords" content="admin, edit, data, month, year">
     <meta name="author" content="Your Name">
-    <title>Edit {{ year }} - {{ month }} | Premium Admin Panel</title>
+    <title>Edit {{ year }} - {{ month }} | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-          font-family: 'Roboto', sans-serif;
-          background-color: #f8f9fa;
-          color: #495057;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
         }
 
         h2 {
-          text-align: center;
-          color: #007bff;
-          margin-bottom: 30px;
-          font-weight: 600;
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-weight: 600;
         }
 
-        table.data-table {
-          width: 95%;
-          margin: 30px auto;
-          border-collapse: collapse;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        table.data-table th,
-        table.data-table td {
-          padding: 12px 15px;
-          text-align: center;
-          border: 1px solid #dee2e6;
+        table th, table td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #dee2e6;
         }
 
-        table.data-table th {
-          background-color: #007bff;
-          color: white;
-          font-weight: 500;
+        table th {
+            background-color: #007bff;
+            color: white;
         }
 
-        table.data-table tr:nth-child(even) {
-          background-color: #f2f2f2;
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         input[type="text"] {
-          width: 90%;
-          padding: 10px;
-          border: 1px solid #ced4da;
-          border-radius: 5px;
-          font-size: 16px;
-          text-align: center;
-          transition: border-color 0.2s ease-in-out;
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
         }
 
         input[type="text"]:focus {
-          outline: none;
-          border-color: #80bdff;
-          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+            border-color: #80bdff;
         }
 
         button {
-          background-color: #007bff;
-          color: white;
-          border: none;
-          padding: 12px 25px;
-          font-size: 18px;
-          border-radius: 5px;
-          cursor: pointer;
-          width: 95%;
-          margin: 20px auto;
-          display: block;
-          transition: background-color 0.2s ease-in-out;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
         }
 
         button:hover {
-          background-color: #0069d9;
+            background-color: #0069d9;
         }
 
         a {
-          display: block;
-          text-align: center;
-          margin-top: 30px;
-          font-size: 18px;
-          color: #007bff;
-          text-decoration: none;
-          transition: color 0.2s ease-in-out;
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
         }
 
         a:hover {
-          color: #0056b3;
-          text-decoration: underline;
-        }
-
-        .fas {
-          margin-right: 8px;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
-{% block content %}
     <h2>Edit {{ year }} - {{ month }}</h2>
-
     <form method="post">
-
-        <table class="data-table">
+        <table>
             <tr>
-                <th>তারিখ</th>
+                <th>Date</th>
                 <th>হস্তমৈথুন</th>
-                <th>নামাজ (ওয়াক্ত)</th>
-                <th>গেম (ঘণ্টা)</th>
-                <th>ঘুম থেকে উঠা</th>
-                <th>ঘুমানো</th>
+                <th>নামাজ</th>
+                <th>গেমিং</th>
+                <th>জাগ্রত হওয়া</th>
+                <th>নিদ্রা যাওয়া</th>
+                <th>মোবাইল ব্যবহার</th>
+                <th>বাহিরে সময়</th>
             </tr>
             {% for day in days %}
             <tr>
                 <td>{{ day.date }}</td>
                 <td><input type="text" name="হস্তমৈথুন" value="{{ day["হস্তমৈথুন"] }}"></td>
-                <td><input type="text" name="নামাজ (ওয়াক্ত)" value="{{ day["নামাজ (ওয়াক্ত)"] }}"></td>
-                <td><input type="text" name="গেম (ঘণ্টা)" value="{{ day["গেম (ঘণ্টা)"] }}"></td>
-                <td><input type="text" name="ঘুম থেকে উঠা" value="{{ day["ঘুম থেকে উঠা"] }}"></td>
-                <td><input type="text" name="ঘুমানো" value="{{ day["ঘুমানো"] }}"></td>
+                <td><input type="text" name="নামাজ" value="{{ day["নামাজ"] }}"></td>
+                <td><input type="text" name="গেমিং" value="{{ day["গেমিং"] }}"></td>
+                <td><input type="text" name="জাগ্রত হওয়া" value="{{ day["জাগ্রত হওয়া"] }}"></td>
+                <td><input type="text" name="নিদ্রা যাওয়া" value="{{ day["নিদ্রা যাওয়া"] }}"></td>
+                <td><input type="text" name="মোবাইল ব্যবহার" value="{{ day["মোবাইল ব্যবহার"] }}"></td>
+                <td><input type="text" name="বাহিরে সময়" value="{{ day["বাহিরে সময়"] }}"></td>
             </tr>
             {% endfor %}
         </table>
-
-        <button type="submit">
-            <i class="fas fa-save"></i> Save Changes
-        </button>
+        <button type="submit">Save Changes</button>
     </form>
-
-    <a href="/admin">
-        <i class="fas fa-arrow-left"></i> Back to Admin Dashboard
-    </a>
-
-{% endblock %}
-
+    <a href="/admin">Back to Dashboard</a>
 </body>
 </html>
