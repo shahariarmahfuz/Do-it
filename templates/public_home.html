@@ -2,127 +2,136 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-  <title>Available Months</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Available Months</title>
 
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f4f6f9; /* Light background to reduce contrast */
-      margin: 0;
-      padding: 0;
-    }
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
 
-    h2 {
-      font-size: 28px; /* Optimized title size */
-      font-weight: 600;
-      color: #ffffff;
-      text-align: center;
-      padding: 25px 0; /* Reduced padding for better compactness */
-      background-color: #007bff;
-      margin: 0;
-      border-bottom: 2px solid #0056b3;
-    }
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px 0;
+            background-color: #007bff;
+            margin: 0;
+            border-bottom: 2px solid #0056b3;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-    .year-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Compact grid with optimal size */
-      gap: 15px;
-      padding: 20px;
-    }
+        .year-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            /* Compact grid */
+            gap: 15px;
+            padding: 20px;
+        }
 
-    .year-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      text-align: center;
-      color: #212529;
-    }
+        .year-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #212529;
+        }
 
-    .month-card {
-      background-color: #ffffff;
-      border-radius: 10px; /* Slightly rounded edges for modern look */
-      padding: 18px; /* Reduced padding for compactness */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow for a soft look */
-      transition: all 0.2s ease;
-      text-decoration: none;
-      margin-bottom: 15px;
-    }
+        .month-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            /* Reduced padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
 
-    .month-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    }
+        .month-card:hover {
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        }
 
-    .month-card i {
-      font-size: 30px; /* Optimized icon size */
-      color: #007bff; /* Matching color to the title */
-    }
+        .month-card:hover i {
+            color: #0056b3;
+        }
 
-    .month-card a {
-      color: #212529;
-      font-size: 18px; /* Adjusted text size for balance */
-      font-weight: 500;
-      text-align: right;
-      flex-grow: 1;
-    }
+        .month-card i {
+            font-size: 20px;
+            /* Optimized icon size */
+            color: #007bff;
+            transition: all 0.2s ease;
+        }
 
-    .month-card a:hover {
-      color: #0056b3;
-    }
+        .month-card a {
+            color: #212529;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: right;
+            flex-grow: 1;
+        }
 
-    /* Responsive design for smaller screens */
-    @media (max-width: 768px) {
-      h2 {
-        font-size: 24px;
-      }
+        .month-card a:hover {
+            color: #0056b3;
+        }
 
-      .year-grid {
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* Slightly smaller cards */
-      }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 24px;
+            }
 
-      .month-card {
-        padding: 15px;
-      }
+            .year-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
 
-      .month-card i {
-        font-size: 26px; /* Reduced icon size for mobile */
-      }
+            .month-card {
+                padding: 12px;
+            }
 
-      .month-card a {
-        font-size: 16px;
-      }
-    }
-  </style>
+            .month-card i {
+                font-size: 18px;
+            }
+
+            .month-card a {
+                font-size: 16px;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-  {% block content %}
-  <h2>Available Months</h2>
+    {% block content %}
+    <h2>Available Months</h2>
 
-  <div class="year-grid">
-    {% for year, months in data.items() %}
-    <div>
-      <div class="year-title">{{ year }}</div>
-      {% for month, link in months.items() %}
-      <a href="/{{ year }}/{{ month }}" class="month-card">
-        <span>{{ month }}</span>
-        <!-- Modern icon for a fresh look -->
-        <i class="fas fa-calendar-day"></i>
-      </a>
-      {% endfor %}
+    <div class="year-grid">
+        {% for year, months in data.items() %}
+        <div>
+            <div class="year-title">{{ year }}</div>
+            {% for month, link in months.items() %}
+            <a href="/{{ year }}/{{ month }}" class="month-card">
+                <span>{{ month }}</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 
-  {% endblock %}
+    {% endblock %}
 </body>
 
 </html>
